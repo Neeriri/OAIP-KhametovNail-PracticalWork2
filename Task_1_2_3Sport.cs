@@ -28,13 +28,14 @@ public class Athlete
 public class DynamicContainer<T>
 {
     private T[] _data;
+    
     private int _size;
     private int _capacity;
 
     public DynamicContainer(int initialCapacity = 4)
     {
         if (initialCapacity < 1)
-            throw new ArgumentException("Initial capacity must be at least 1.");
+            throw new ArgumentException("Первая вместимост небольше одного 1.");
         _capacity = initialCapacity;
         _data = new T[_capacity];
         _size = 0;
