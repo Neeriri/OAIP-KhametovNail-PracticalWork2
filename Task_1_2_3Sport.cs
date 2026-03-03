@@ -73,7 +73,7 @@ public class DynamicContainer<T>
             data[i] = data[i + 1];
         
         size--;
-        data[size] = default;
+        
     }
 
     public void Insert(int index, T item)
