@@ -1,5 +1,26 @@
 using System;
 
+public class Athlete
+{
+    public int Id { get; set; }
+    public string Name { get; set; }
+    public string Sport { get; set; }
+    public double Result { get; set; }
+
+    public Athlete(int id, string name, string sport, double result)
+    {
+        Id = id;
+        Name = name;
+        Sport = sport;
+        Result = result;
+    }
+
+    public override string ToString()
+    {
+        return $"№{Id}: {Name} ({Sport}) - Результат: {Result:F2}";
+    }
+}
+
 public class DynamicContainer<T>
 {
     private T[] data;
@@ -83,25 +104,28 @@ class Program
 {
     static void Main()
     {
-        var container = new DynamicContainer<int>();
-
-        Console.WriteLine("=== Тест 1: Добавление 1000 элементов ===");
+        var container = new DynamicContainer<Athlete>();
         for (int i = 1; i <= 1000; i++)
         {
-            container.Add(i * 10);
+            var athlete = new Athlete(i, $"Спортсмен {i}", "Легкая атлетика", i * 1.5);
+            container.Add(athlete);
         }
-        Console.WriteLine($"Успешно добавлено элементов: {container.Count}");
 
-        Console.WriteLine($"Элемент [0]: {container[0]}");
-        Console.WriteLine($"Элемент [500]: {container[500]}");
-        Console.WriteLine($"Элемент [999]: {container[999]}");
+        Console.WriteLine("Спортшкола: Добавление 1000 спортсменов ");
+    
+        Console.WriteLine($"Успешно добавлено спортсменов: {container.Count}");
 
-        Console.WriteLine("\n=== Тест 2: Вставка и Удаление ===");
-        container.Insert(0, 999);
-        Console.WriteLine($"После вставки в начало элемент [0]: {container[0]}");
+        Console.WriteLine($"Спортсмен [0]: {container[0]}");
+        Console.WriteLine($"Спортсмен [500]: {container[500]}");
+        Console.WriteLine($"Спортсмен [999]: {container[999]}");
+
+        Console.WriteLine("\nСпортшкола: Вставка и Удаление");
+        var topAthlete = new Athlete(0, "Чемпион", "Плавание", 99.9);
+        container.Insert(0, topAthlete);
+        Console.WriteLine($"После вставки лидера элемент [0]: {container[0]}");
         
         container.RemoveAt(0);
-        Console.WriteLine($"После удаления элемент [0]: {container[0]}");
+        Console.WriteLine($"После удаления лидера элемент [0]: {container[0]}");
 
         Console.WriteLine("\nРабота завершена успешно.");
     }
